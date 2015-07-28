@@ -1,23 +1,26 @@
-var path = require('path');
+ï»¿var path = require('path');
 //cargar modelo orm
 var Sequelize = require('sequelize');
 //usar bbdd SQLite
 var sequelize = new Sequelize(null, null, null, 
 		{ dialect : "sqlite", storage: "quiz.sqlite" }
 );
-// importar la definición de la tabal Quiz en quiz.js
+// importar la definiciÃ³n de la tabal Quiz en quiz.js
 var Quiz = sequelize.import(path.join( '.', 'quiz'));	// OJO que no he puesto _dirname
-exports.Quiz = Quiz;		// exportar definición de talba quiz
+exports.Quiz = Quiz;		// exportar definiciÃ³n de tabla quiz
 
 //crea e inicializa tabla de preguntas en BD
-sequelize.sync().success(function() {
+sequelize.sync().then(function() {
 	// success ejecuta el manejador una vez crada la tabla
-  Quiz.count().success(function (count) {
-	if (count=== 0) {	// inicializar si vacía
+  Quiz.count().then(function (count) {
+	if (count=== 0) {	// inicializar si vacÃ­a
 		Quiz.create({ pregunta: 'Capital de Italia',
-			      respuesta : 'Roma', respuestaAlta : 'Roma', tema : 'Geografía', dificultad : 1
+			      respuesta : 'Roma', 
+				  respuestaAlter : 'Roma', 
+				  tema : 'GeografÃ­a', 
+				  dificultad : 1
 				})
-		.success(function() {console.log('Base de datos inicializada')});
+		.then(function() {console.log('Base de datos inicializada')});
 	};
   });
 });

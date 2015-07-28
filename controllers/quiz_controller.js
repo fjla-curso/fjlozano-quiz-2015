@@ -4,7 +4,7 @@
 exports.question = function (req, res) {
 	//res.render('quizes/question', {pregunta: 'Capital de España'});	// sin BD tipo modulo 6
 	models.Quiz.findAll().then(function(quiz) {		// antes en lugar de then era success
-		res.render('quizes/question', {pregunta: quiz[0].pregunta});
+		res.render('quizes/question', {eltema: quiz[0].tema, ladificultad: quiz[0].dificultad , pregunta: quiz[0].pregunta});
 	})
 };
 
@@ -21,9 +21,9 @@ exports.answer = function (req, res) {
    } else 
    if (srespuesta === '') { 
 	// aprende: me muestra el código HTML si lo pongo aquí: res.render('quizes/answer', { respuesta: ' <span style="color:#F00">¿En blanco...? ¡Inténtalo de nuevo!</span> ', title:"Quiz (a mano)"});
-	res.render('quizes/answer', { respuesta: '¿En blanco...? ¡Inténtalo de nuevo! ', title:"Quiz (a mano)"});
+	res.render('quizes/answer', { respuesta: '¿En blanco...? ¡Inténtalo de nuevo! ', title:"Quiz (un esfuerzo...)"});
    } else {
-	res.render('quizes/answer', { respuesta: '¡Oh, '+req.query.respuesta+' no es correcto! Es'+srespuesta  , title:"Quiz"  });
+	res.render('quizes/answer', { respuesta: '¡Oh, '+req.query.respuesta+' no es correcto! Es '+srespuesta  , title:"Quiz (Oh)"  });
    }
 	})
 };
