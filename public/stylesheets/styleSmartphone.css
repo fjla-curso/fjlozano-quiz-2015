@@ -1,7 +1,7 @@
 body {
-background:#333;
+background:#555;
 }
 #page-wrap:after{ content:"Smartphone Layout";}
-body {fon-size: xx-large;}
+body {font-size: x-large;}
 footer, input {font-size: large;}
 h2 span, section h3 {display : none;}
