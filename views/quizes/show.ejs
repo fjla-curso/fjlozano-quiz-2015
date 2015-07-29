@@ -1,0 +1,10 @@
+﻿
+  
+<p>Marchando una pregunta de  <b><%= quiz.tema %></b>, de <b>dificultad <%= quiz.dificultad %>/3</b>. </p>
+    <form method="get" action="/quizes/<%= quiz.id %>/answer">
+	  Pregunta: <%= quiz.pregunta %> </p>
+	  <input type="text" name="respuesta" value"Escriba aquí"/>
+	  <input type="submit" value="Enviar">
+	  </form>
+	  <p>&nbsp;</p>
+
