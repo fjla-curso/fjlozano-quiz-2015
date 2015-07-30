@@ -10,6 +10,10 @@ router.get('/author', function(req, res) {
   res.render('author', { title: 'Todos los autores de Quiz (a mano)', subtitle: 'Quiz (a mano)', autores: 'F.Javier Lozano' });
 });
 
+// Autoload de comandos con  :quizId  módulo 7 parte 10
+router.param('quizId', quizController.load);
+
+
 // version con varias preguntas y cada una es una parte de la URL
 router.get('/quizes', quizController.index );
 router.get('/quizes/:quizId(\\d+)', quizController.show );
