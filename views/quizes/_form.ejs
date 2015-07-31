@@ -1,0 +1,24 @@
+﻿
+<div style="text-align:left;margin-left:20px">  
+	  Pregunta:  <input type="text" id="preg" name="quiz[pregunta]" value"<%= quiz.pregunta%>"/><br/>
+	  Respuesta: <input type="text" id="resp" name="quiz[respuesta]" value"<%= quiz.respuesta%>"/>
+	  Respuesta alternativa: <input type="text" id="resp2" name="quiz[respuestaAlter]" value"<%= quiz.respuestaAlter%>"/>
+	  <br/>Tema: 
+  <select name="quiz[tema]">
+  <option value="Otro" selected>Otro</option>
+  <option value="Humanidades">Humanidades</option>
+  <option value="Ocio">Ocio</option>
+  <option value="Ciencia">Ciencia</option>
+  <option value="Tecnología">Tecnología</option>
+  <option value="Geografía">Geografía</option>
+  </select>
+  <br/>Dificultad 
+  <select name="quiz[dificultad]">
+  <option value="1" selected>Fácil</option>
+  <option value="2">Normal</option>
+  <option value="3">Difícil</option>
+  </select>
+  <br/>
+  <a href="/quizes"><input type="button" value="Cancelar"></a>
+  <input type="submit" value="Guardar">
+</div>
