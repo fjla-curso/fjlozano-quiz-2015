@@ -23,7 +23,8 @@ router.post('/quizes/create',  quizController.create);  // ATENCION, que es un P
 //version con 1 sola pregunta no tenía parámetros
 //router.get('/quizes/question', quizController.question );
 //router.get('/quizes/answer', quizController.answer );
-
+// borrado
+router.delete('/quizes/:quizId(\\d+)',  quizController.destroy);  // ATENCION, que es un DELETE no un POST (esto es clave)
 /*
 router.get('/quizes', function(req, res) {
   res.render('quizes/question', { title: 'Quiz. Comienzan las preguntas', subtitle: 'Quiz (a mano)' });

@@ -1,0 +1,164 @@
+
+
+
+VUELTA ATRAS
+
+c:\xampp\htdocs\nodejs\mis_proyectos\quiz>git log --onel
+1ca7786 version inserta preguntas bd quiz
+c2eef77 Todo mod.7 hasta autoload MW
+dd608ca ya consulta varias preg bd quiz
+a02951c nuevos campos bd quiz ok
+d760703 Comienzo ampliación bd quiz
+5ed86b2 Despliegue en Heroku fjla
+fadea53 Despliegue en Heroku fjla
+74b3794 Despliegue en Heroku fjla
+6a4ca0f Despliegue en Heroku fjla
+b3f5191 Despliegue en Heroku fjla
+e5f7ecf fjla Despliegue en Heroku
+6b80f81 Primera versión quick tras favico
+d4bd6d6 esqueleto espress-generator
+
+c:\xampp\htdocs\nodejs\mis_proyectos\quiz>git log
+commit 1ca7786d45b0090c853cb14fa362a5731d61764b
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Fri Jul 31 12:48:54 2015 +0200
+
+    version inserta preguntas bd quiz
+
+commit c2eef775ace82bed946f24bae32816339b237aa5
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Thu Jul 30 09:01:18 2015 +0200
+
+    Todo mod.7 hasta autoload MW
+
+commit dd608cae62bd9223ec1bea9fc429489a89daa9c7
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Wed Jul 29 17:36:14 2015 +0200
+
+    ya consulta varias preg bd quiz
+
+commit a02951c0f8269681b7fb50d205cab59be9c6a13d
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Tue Jul 28 22:52:43 2015 +0200
+
+    nuevos campos bd quiz ok
+
+commit d76070326f5d7d2a18d33edd911dc2bbece3fcc9
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Tue Jul 28 15:51:02 2015 +0200
+
+    Comienzo ampliación bd quiz
+
+commit 5ed86b207f69614f4babc6f4e87e5e8b6a7d43ae
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Thu Jul 16 23:45:26 2015 +0200
+
+    Despliegue en Heroku fjla
+
+commit fadea53e63327f554400e7838fdf5e322a6164f9
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Thu Jul 16 23:31:44 2015 +0200
+
+    Despliegue en Heroku fjla
+
+commit 74b3794d87b2b7964c3fbbfe0ea8df8315c75295
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Thu Jul 16 23:21:27 2015 +0200
+
+    Despliegue en Heroku fjla
+
+commit 6a4ca0f5e370b84069229e102575325171a0340c
+Author: Javier Lozano <blesa.gaceta@gmail.com>
+Date:   Thu Jul 16 12:26:58 2015 +0200
+
+    Despliegue en Heroku fjla
+
+commit b3f5191af053bfee467aa4e3f244d44ef4cce112
+Author: Javier Lozano <blesa.gaceta@gmail.com>
+Date:   Thu Jul 16 10:55:33 2015 +0200
+
+    Despliegue en Heroku fjla
+
+commit e5f7ecfa78ebb250c2fc42c3a20683ef39f20d21
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Mon Jul 13 20:06:04 2015 +0200
+
+    fjla Despliegue en Heroku
+
+commit 6b80f81d4377203739d285e43d6c3ac24b81749c
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Sun Jul 12 11:24:35 2015 +0200
+
+    Primera versión quick tras favico
+
+commit d4bd6d69c79d713962129b204303d1d4016c126c
+Author: fjla-curso <blesa.gaceta@gmail.com>
+Date:   Sat Jul 11 16:07:28 2015 +0200
+
+    esqueleto espress-generator
+
+c:\xampp\htdocs\nodejs\mis_proyectos\quiz>
+
+
+
+
+del layout.ejs
+
+  <section class="main" id="s1">
+  <% if (errors.length) { %>
+  <span id='ErrorMsgs'>
+  Corregir errores: <br/>
+    <% for (var i in errors ) { %>
+    <span><%= errors[i].message %></span> <br/>
+    <% } %>
+  </span>
+  <% } %>
+  
+<div><%- body %></div>
+
+  </section>
+  
+
+de quiz_controller.js
+
+exports.edit = function( req, res) {
+	  var quiz = req.quiz; // autoload
+	  res.render('quizes/edit', {quiz : quiz, errors: [] });
+};
+
+exports.update = function(req, res) {
+	req.quiz.pregunta  = req.body.quiz.pregunta;
+	req.quiz.respuesta = req.body.quiz.respuesta;
+	req.quiz.respuestaAlter = req.body.quiz.respuestaAlter;
+	req.quiz.tema = req.body.quiz.tema;
+	req.quiz.dificultad = req.body.quiz.dificultad;
+	
+	req.quiz.validate().then(
+		function(err) {
+			if (err) {
+			res.render('quizes/edit', {quiz : req.quiz, errors: err.errors} );
+			} else {
+			req.quiz
+				.save( {fields: ["pregunta", "respuesta", "respuestaAlter", "tema", "dificultad" ]})
+				.then(function() {	  res.redirect('/quizes') })
+			}
+		}
+	);
+};
+
+de routes/index.js
+// edición
+router.get('/quizes/:quizId(\\d+)/edit',  quizController.edit);	
+router.put('/quizes/:quizId(\\d+)',  quizController.update);	
+
+
+  
+  
+  
+  <option value="otro" <%if (quiz.tema==="otro"){%> selected <%}%>>Otro</option>
+
+  tenia:
+  "pg-hstore": "^2.3.2",
+    "sequelize": "^1.7.11",
+    "serve-favicon": "~2.1.3",
+    "sqlite3": "^3.0.9"
