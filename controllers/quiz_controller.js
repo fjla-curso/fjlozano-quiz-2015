@@ -55,10 +55,31 @@ exports.answer = function (req, res) {
 };
 
 exports.index = function (req, res) {
-	//res.render('quizes/question', {pregunta: 'Capital de España'});	// sin BD tipo modulo 6
-	models.Quiz.findAll().then(function(quizes) {		// antes en lugar de then era success
-		res.render('quizes/index.ejs', { quizes : quizes });
-	}).catch(function(error) { next(error);})
+// modulo 7
+	if(req.query.search || req.query.searchTema || req.query.searchdificultad) {
+		var filtro=(req.query.search||'').replace(' ', '%');  // Poner % en lugar de espacios si queremos que busque varias palabras no necesariamente seguidas
+		var filtroTema=(req.query.searchTema||'');  // Poner % en lugar de espacios si queremos que busque varias palabras no necesariamente seguidas
+		var filtrodificultad1=(req.query.searchdificultad||1);
+		var filtrodificultad2=(req.query.searchdificultad||3);  // número
+ 		models.Quiz.findAll({
+				where: [
+			
+				
+					{pregunta : { like : '%'+filtro+'%'} }   ,
+				    {tema     : { like : '%'+filtroTema+'%'} } ,
+				    {dificultad  : { gte : filtrodificultad1 }  } ,
+				    {dificultad  : { lte : filtrodificultad2 }  } 
+				],order:'pregunta ASC'
+			//[     'pregunta like ?','%'+filtro+'%'    ],order:'pregunta ASC'
+ 			}).then(function(quizes){
+				res.render('quizes/index', {quizes:quizes});
+			}).catch(function(error){next(error);});
+    } else {
+		//res.render('quizes/question', {pregunta: 'Capital de España'});	// sin BD tipo modulo 6
+		models.Quiz.findAll().then(function(quizes) {		// antes en lugar de then era success
+		  res.render('quizes/index.ejs', { quizes : quizes });
+		}).catch(function(error) { next(error);})
+	}	
 };
 
 exports.new = function(req, res) {
