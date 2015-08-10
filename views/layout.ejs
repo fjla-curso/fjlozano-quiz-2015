@@ -20,7 +20,12 @@
   <div id="page-wrap">
   <header class="main" id="h1">
     
-      <span class="right">Aquí irán enlaces ligados a la sesión</span>
+      <span class="right"> · APUNTES sesión (módulo 9, diapo 22)</span>
+	  <%if (!session.user){ %>
+		<span class="right"><a href="/login">Login</a></span>
+	  <% } else { %>
+	    <span class="right"><%=session.user.username %> || <a href="/logout">Logout</a></span>
+	  <% }  %>
     
     <h1>Quiz a mano</h1>
   </header>

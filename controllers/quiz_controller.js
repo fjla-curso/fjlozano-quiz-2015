@@ -4,7 +4,12 @@
 // tema 10
 // Autoload de comandos con  :quizId  módulo 7 parte 10  pone los catch y parametriza los req.quiz
 exports.load = function(req, res, next, quizId) {
-		models.Quiz.find(quizId).then(
+		models.Quiz.find(
+			{		// nuevo para tabla de comentarios
+			where : { id: Number(quizId) },
+			include : [{ model : models.Comment }]
+			}
+			).then(
 			function(quiz) {
 				if (quiz) {
 					req.quiz = quiz;

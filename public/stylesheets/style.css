@@ -6,3 +6,4 @@ header, nav, section {background:#eee; text-align: center; color:#00F};
 a {
   color: #00B7FF;
 }
+.right {float: right;}

@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var partials = require('express-partials');
 var methodOverride = require('method-override');
+var session = require('express-session');
+
 var routes = require('./routes/index');
 /////////var users = require('./routes/users');
 //var authors = require('./routes/author');
@@ -25,9 +27,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: false })); // TEMAA 8, diapo 6 recomienda quitar {extended: false}
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
+// las dos siguientes son del módulo 9 diapos 15 y siguientes
+app.use(cookieParser('Quiz 2015'));
+app.use(session());
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// módulo 9
+app.use(function(req, res, next) {
+//guardar path en session.redir para después del login
+	if (! req.path.match(/\/login|\/logout/)) {
+		req.session.redir = req.path;
+	}
+//hacer visile req.session en las vistas
+	res.locals.session = req.session;
+	next();
+});
+
 
 app.use('/', routes);
 /////////////////////////////app.use('/users', users);
