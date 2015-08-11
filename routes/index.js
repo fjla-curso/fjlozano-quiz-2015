@@ -27,17 +27,17 @@ router.get('/logout', sessionController.destroy);  	// destruye session
 router.get('/quizes', quizController.index );
 router.get('/quizes/:quizId(\\d+)', quizController.show );
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer );
-router.get('/quizes/new',  quizController.new);
-router.post('/quizes/create',  quizController.create);  // ATENCION, que es un POST no un GET (esto es clave)
+router.get('/quizes/new',  			sessionController.loginRequired, quizController.new);		// control de sesiones añadido módulo 9 diapo 26, la el alta de preguntas
+router.post('/quizes/create',   	sessionController.loginRequired, quizController.create);  // ATENCION, que es un POST no un GET (esto es clave)
 //version con 1 sola pregunta no tenía parámetros
 //router.get('/quizes/question', quizController.question );
 //router.get('/quizes/answer', quizController.answer );
 // borrado
-router.delete('/quizes/:quizId(\\d+)',  quizController.destroy);  // ATENCION, que es un DELETE no un POST (esto es clave)
+router.delete('/quizes/:quizId(\\d+)',  sessionController.loginRequired, quizController.destroy);  // ATENCION, que es un DELETE no un POST (esto es clave).  Control de sesiones añadido para borrar solo por usuarios registrados
 
 
-router.get('/quizes/:quizId(\\d+)/comments/new',  commentController.new);
-router.post('/quizes/:quizId(\\d+)/comments',  commentController.create);  // ATENCION, que es un POST no un GET (esto es clave)
+router.get('/quizes/:quizId(\\d+)/comments/new',  	commentController.new);
+router.post('/quizes/:quizId(\\d+)/comments',  		commentController.create);  // ATENCION, que es un POST no un GET (esto es clave)
 /*
 router.get('/quizes', function(req, res) {
   res.render('quizes/question', { title: 'Quiz. Comienzan las preguntas', subtitle: 'Quiz (a mano)' });

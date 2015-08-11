@@ -7,9 +7,10 @@
 	  <input type="submit" value="Enviar">
 	  </form>
 	  <p>&nbsp;</p>
-
+<div style="background-color:#777">
 <p><a href="/quizes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a></p>	  
 <h3>Comentarios:</h3>
-<% for(index in quiz.Comments) { %>
-<p> - <%= quiz.Comments[index].texto %>
+<% for(index in quiz.comments) { %>
+<p> - <%= quiz.comments[index].texto %>
 <% } %>
+</div>

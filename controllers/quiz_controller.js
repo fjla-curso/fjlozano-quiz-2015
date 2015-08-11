@@ -23,7 +23,8 @@ exports.load = function(req, res, next, quizId) {
 exports.show = function (req, res) {
 	//res.render('quizes/question', {pregunta: 'Capital de España'});	// sin BD tipo modulo 6
 	models.Quiz.find(req.params.quizId).then(function(quiz) {		// antes en lugar de then era success
-		res.render('quizes/show', {quiz :  req.quiz }); // antes pasaba cada campo: {eltema: quiz[0].tema, ladificultad: quiz[0].dificultad , pregunta: quiz[0].pregunta});
+		res.render('quizes/show', {quiz :  req.quiz  }); // antes pasaba cada campo: {eltema: quiz[0].tema, ladificultad: quiz[0].dificultad , pregunta: quiz[0].pregunta});
+		// y ojo que igual hay que pasar pronto comments: comments para que aparezcan OJO.
 	})
 };
 // get /quizes /question cuando era una pregunta sola

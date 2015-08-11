@@ -1,4 +1,14 @@
-﻿// esto está en la diapo 20 del módulo 9
+﻿// diapo 27 del módulo 9.  este middleware solo deja continuar si está autenticado  El orden de aparición es importante
+exports.loginRequired = function(req, res, next) {
+	  if (req.session.user) {
+		  next();
+	  } else {
+		  res.redirect('/login');
+	  }
+};
+
+
+// esto está en la diapo 20 del módulo 9
 exports.new = function(req, res) {
 	var errors = req.session.errors || {};
 	req.session.errors =  {};
@@ -28,5 +38,5 @@ exports.create = function(req, res) {
 
 exports.destroy = function(req, res) {
 	delete req.session.user;
-	res.redirect(req.session.redir.toString()); // dicen qeu redirect a path anterior a login; aprender redir
+	res.redirect(req.session.redir.toString()); // dicen que redirect a path anterior a login; aprender redir
 };

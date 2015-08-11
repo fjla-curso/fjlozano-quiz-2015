@@ -20,11 +20,14 @@
   <div id="page-wrap">
   <header class="main" id="h1">
     
-      <span class="right"> · APUNTES sesión (módulo 9, diapo 22)</span>
+      <span class="right" style="color:#777"> · APUNTES sesión (módulo 9, diapo 22)</span><br/>
 	  <%if (!session.user){ %>
 		<span class="right"><a href="/login">Login</a></span>
 	  <% } else { %>
 	    <span class="right"><%=session.user.username %> || <a href="/logout">Logout</a></span>
+		<br/>
+		Última actividad: <%= session.ultimoHHMM %>
+		<!--'Ha estado más de dos minutos sin actividad. Sesión finalizada.'-->
 	  <% }  %>
     
     <h1>Quiz a mano</h1>

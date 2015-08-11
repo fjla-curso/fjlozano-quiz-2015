@@ -1,6 +1,6 @@
 <div name="filtros" style="background:#AA5;padding:3px">
-<p>Filtro de preguntas
-</p>
+<h3>Filtro de preguntas
+</h3>
 <form method="get"  action="/quizes">
 <table>
 <tr><td>Texto de la pregunta <br/>(admite varias palabras en el orden de aparición)</td><td>Tema</td><td>Dificultad</td></tr>
@@ -30,6 +30,7 @@
 	  </td>
 	  <td><input type="submit" value="Filtrar"></td></tr></table></form>
 </div>
+<h3>Preguntas</h3>
 	  <table>
 <% var i; for (i= 0; i< quizes.length; i++) {  %>
  <tr>
@@ -38,6 +39,8 @@
  <%= quizes [i].pregunta %> </a></td><td><i>(<%= quizes[i].tema %>)</i>
  </td><td><%= quizes[i].dificultad %>
  </td>
+ 
+<% if (session.user) { %>
   <td>
  <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
    <button type="submit" onClick="return confirm('Borrar la pregunta: <%= quizes[i].pregunta %>');">
@@ -45,8 +48,12 @@
    </button>
  </form>
  </td>
+<% } %>
 
  </tr>
 <% } %>
 </table>
+
+<% if (session.user) { %>
 <p><a href="/quizes/new"><button type="button">Crear pregunta</button></a></p>
+<% } %>

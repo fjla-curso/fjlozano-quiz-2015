@@ -44,6 +44,21 @@ app.use(function(req, res, next) {
 	next();
 });
 
+app.use(function(req, res, next){
+  var ahora = new Date().getTime();
+  var date = new Date(ahora);
+
+  if (req.session.user) {
+	 if (120000 <= (ahora - req.session.ultimoAcc)){
+	 req.session.destroy();
+	 } else {
+	 req.session.ultimoAcc = ahora;
+	 req.session.ultimoHHMM = date.toString();
+	 }
+  }
+  next();
+ }
+);
 
 app.use('/', routes);
 /////////////////////////////app.use('/users', users);

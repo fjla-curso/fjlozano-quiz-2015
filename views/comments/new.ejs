@@ -4,11 +4,13 @@
 <p>
     <form method="post" action="/quizes/<%=quizid%>/comments/">
 	   <input type="text" id="comment" name="comment[texto]" value="" />
-<!--	   <input type="hidden" id="votospos" name="comment[votospos]" value="0" />
+	   <input type="hidden" id="votospos" name="comment[votospos]" value="0" />
 	   <input type="hidden" id="votosneg" name="comment[votosneg]" value="0" />
-	   <input type="hidden" id="fecalta" name="comment[fecalta]" value="2015-08-07 17:36" />
-	   <input type="hidden" id="nick" name="comment[nick]" value="F.J.L.A." />
-	   -->
+	   <input type="hidden" id="fecalta" name="comment[fecalta]" value="<%=new Date().getTime().toString()%>" />
+	   <%if (!session.user){ $nick = 'Anónimo'; %>
+	   <% } else { $nick = session.user.username%>
+ 	   <% }  %>
+	   <input type="hidden" id="nick" name="comment[nick]" value="<%=$nick%>" />
 	  <button type="submit">Opinar</button>
 	  </form>
 	  </p>
