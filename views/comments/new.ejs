@@ -4,6 +4,7 @@
 <p>
     <form method="post" action="/quizes/<%=quizid%>/comments/">
 	   <input type="text" id="comment" name="comment[texto]" value="" />
+	   <!-- OJO no poner un campo oculto intentando simular el false, que no es ni FALSE ni 0, y pervierte la autorización del admin al campo -->
 	   <input type="hidden" id="votospos" name="comment[votospos]" value="0" />
 	   <input type="hidden" id="votosneg" name="comment[votosneg]" value="0" />
 	   <input type="hidden" id="fecalta" name="comment[fecalta]" value="<%=new Date().getTime().toString()%>" />

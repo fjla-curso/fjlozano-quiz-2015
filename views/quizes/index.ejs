@@ -1,4 +1,4 @@
-<div name="filtros" style="background:#AA5;padding:3px">
+<div name="filtros" style="background:#CCA;padding:3px">
 <h3>Filtro de preguntas
 </h3>
 <form method="get"  action="/quizes">
@@ -28,10 +28,12 @@
   <option value="3">Difícil</option>
   </select>
 	  </td>
-	  <td><input type="submit" value="Filtrar"></td></tr></table></form>
+</tr></table><input type="submit" value="Filtrar"></form>
 </div>
+
 <h3>Preguntas</h3>
 	  <table>
+	  <tr><th>Cuestión</th><th>Tema</th><th>Dificultad</th></tr>
 <% var i; for (i= 0; i< quizes.length; i++) {  %>
  <tr>
  <td>

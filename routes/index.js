@@ -15,6 +15,9 @@ router.get('/author', function(req, res) {
 
 // Autoload de comandos con  :quizId  módulo 7 parte 10
 router.param('quizId', quizController.load);	// autoload :quizId
+// Autoload de comandos con  :quizId  módulo 9 diapo 32
+// QUIZ18 
+router.param('commentId', commentController.load);	// autoload :commentId
 
 // modulo 9 definicion ruta session
 router.get('/login', sessionController.new);  	// formulario de login
@@ -35,9 +38,11 @@ router.post('/quizes/create',   	sessionController.loginRequired, quizController
 // borrado
 router.delete('/quizes/:quizId(\\d+)',  sessionController.loginRequired, quizController.destroy);  // ATENCION, que es un DELETE no un POST (esto es clave).  Control de sesiones añadido para borrar solo por usuarios registrados
 
-
+// comentarios
 router.get('/quizes/:quizId(\\d+)/comments/new',  	commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',  		commentController.create);  // ATENCION, que es un POST no un GET (esto es clave)
+// QUIZ18 no funciona la moderación de comentarios. ¿por qué? 
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
 /*
 router.get('/quizes', function(req, res) {
   res.render('quizes/question', { title: 'Quiz. Comienzan las preguntas', subtitle: 'Quiz (a mano)' });

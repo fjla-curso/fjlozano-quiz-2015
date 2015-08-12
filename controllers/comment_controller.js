@@ -1,5 +1,22 @@
 ﻿var models = require('../models/models.js');
 
+// autoload : id de comentarios
+// QUIZ18
+exports.load = function(req, res, next, commentId) {
+	models.Comment.find({
+			where : {
+					id : Number(commentId)
+			}
+	}).then(function(comment) {
+	if (comment) {
+			req.comment = comment;
+			next();
+	} else { next(new Error('No existe commentId='+ commentId))}
+	}
+	).catch(function(error) { next(error) } );
+};	
+
+
 
 exports.new = function(req, res) {
 	res.render('comments/new.ejs', {quizid: req.params.quizId });
@@ -16,6 +33,7 @@ exports.new = function(req, res) {
 exports.create = function(req, res) {
 	var comment  = models.Comment.build( 
 	{ texto: req.body.comment.texto,
+	  publicado : req.body.comment.publicado,
 	  votospos: req.body.comment.votospos,
 	  votosneg: req.body.comment.votosneg,
 	  fecalta: req.body.comment.fecalta,
@@ -41,3 +59,14 @@ exports.create = function(req, res) {
 	//  res.redirect('/quizes');
 	//})
 
+
+	
+// get  que necesita autoload (atención a la segunda línea)
+// QUIZ18
+exports.publish = function(req, res) {
+		req.comment.publicado = true;
+		
+		req.comment.save( { fields : ["publicado"]  } )
+			.then( function () { res.redirect('/quizes/'+req.params.quizId); } )
+			.catch( function(error) { next(error) } );
+};
