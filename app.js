@@ -50,12 +50,12 @@ app.use(function(req, res, next){
   
 // personalizado para que caduque al minuto, por no hacer esperar
   if (req.session.user) {
-	 if (60*1000 <= (ahora - req.session.ultimoAcc)){
+	 if (90*1000 <= (ahora - req.session.ultimoAcc)){
 	 req.session.destroy();
 	 } else {
 	 req.session.ultimoAcc = ahora;
 	 req.session.ultimoHHMM = date.toString();
-	 req.session.TXTLIMIT = 'Caducará la sesión en 1 minuto.';
+	 req.session.TXTLIMIT = 'Caducará la sesión en 1 minuto y medio.';
 	 }
   }
   next();

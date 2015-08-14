@@ -70,3 +70,17 @@ exports.publish = function(req, res) {
 			.then( function () { res.redirect('/quizes/'+req.params.quizId); } )
 			.catch( function(error) { next(error) } );
 };
+exports.publishmas = function(req, res) {
+		req.comment.votospos++;
+		
+		req.comment.save( { fields : ["votospos"]  } )
+			.then( function () { res.redirect('/quizes/'+req.params.quizId); } )
+			.catch( function(error) { next(error) } );
+};
+exports.publishmenos = function(req, res) {
+		req.comment.votosneg--;
+		
+		req.comment.save( { fields : ["votosneg"]  } )
+			.then( function () { res.redirect('/quizes/'+req.params.quizId); } )
+			.catch( function(error) { next(error) } );
+};

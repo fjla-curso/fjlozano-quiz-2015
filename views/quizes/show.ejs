@@ -15,7 +15,14 @@
 <h3>Comentarios:</h3>
 <% for(index in quiz.comments) { %>
  	<%if(quiz.comments[index].publicado  || session.user ) { %>  
-		<p> - <%= quiz.comments[index].texto %>
+		<p> - <%= quiz.comments[index].texto %> <br/>
+		 <span style="color:#777;font-size:small"> * 
+		 <a href="/quizes/<%=quiz.id%>/comments/<%=quiz.comments[index].id%>/publishmas"><img src="/images/icomanoarriba.png"/> Votos+ </a>
+		 <%= quiz.comments[index].votospos %> * 
+		   <a href="/quizes/<%=quiz.id%>/comments/<%=quiz.comments[index].id%>/publishmenos"><img src="/images/icomanoabajo.png"/> Votos- </a>
+		   <%= quiz.comments[index].votosneg %> * 
+		   por <%= quiz.comments[index].nick %> * </span>
+		   
 		   <% if (session.user && ! quiz.comments[index].publicado) { %> 
 				<a href="/quizes/<%=quiz.id%>/comments/<%=quiz.comments[index].id%>/publish">
 				 <button>Publicar</button></a> 

@@ -43,6 +43,8 @@ router.get('/quizes/:quizId(\\d+)/comments/new',  	commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',  		commentController.create);  // ATENCION, que es un POST no un GET (esto es clave)
 // QUIZ18 no funciona la moderación de comentarios. ¿por qué? 
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publishmas', sessionController.loginRequired, commentController.publishmas);
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publishmenos', sessionController.loginRequired, commentController.publishmenos);
 /*
 router.get('/quizes', function(req, res) {
   res.render('quizes/question', { title: 'Quiz. Comienzan las preguntas', subtitle: 'Quiz (a mano)' });
